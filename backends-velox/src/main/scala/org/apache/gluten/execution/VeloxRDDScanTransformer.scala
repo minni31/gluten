@@ -112,10 +112,10 @@ case class VeloxRDDScanTransformer(
   }
 
   /**
-   * Additional validation for Arrow export compatibility. The RDDScan path transfers data via
-   * Arrow ABI, which has stricter constraints than Velox's type system:
-   * - Map types can trigger "Map data key type should be a non-nullable" in Arrow export
-   * - Interval types are not supported by ArrowWritableColumnVector
+   * Additional validation for Arrow export compatibility. The RDDScan path transfers data via Arrow
+   * ABI, which has stricter constraints than Velox's type system:
+   *   - Map types can trigger "Map data key type should be a non-nullable" in Arrow export
+   *   - Interval types are not supported by ArrowWritableColumnVector
    */
   private def validateArrowCompatibility(dataType: DataType): Option[String] = {
     dataType match {
