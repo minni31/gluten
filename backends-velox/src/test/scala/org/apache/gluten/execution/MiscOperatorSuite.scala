@@ -805,10 +805,11 @@ class MiscOperatorSuite extends VeloxWholeStageTransformerSuite with AdaptiveSpa
     if (isSparkVersionGE("4.1")) {
       assert(plan.find(_.getClass.getSimpleName == "OneRowRelationExec").isDefined)
     } else {
-      assert(plan.find(_.isInstanceOf[RDDScanExec]).isDefined)
+      // RDDScanExec is offloaded to VeloxRDDScanTransformer which produces columnar
+      // output directly, so no RowToVeloxColumnarExec is needed.
+      assert(plan.find(_.isInstanceOf[VeloxRDDScanTransformer]).isDefined)
     }
     assert(plan.find(_.isInstanceOf[ProjectExecTransformer]).isDefined)
-    assert(plan.find(_.isInstanceOf[RowToVeloxColumnarExec]).isDefined)
   }
 
   test("equal null safe") {

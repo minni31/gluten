@@ -1205,6 +1205,11 @@ class VeloxSparkPlanExecApi extends SparkPlanExecApi with Logging {
   override def genColumnarRangeExec(rangeExec: RangeExec): ColumnarRangeBaseExec =
     ColumnarRangeExec(rangeExec.range)
 
+  override def isSupportRDDScanExec(plan: RDDScanExec): Boolean = true
+
+  override def getRDDScanTransform(plan: RDDScanExec): RDDScanTransformer =
+    VeloxRDDScanTransformer.replace(plan)
+
   override def genColumnarTailExec(limit: Int, child: SparkPlan): ColumnarCollectTailBaseExec =
     ColumnarCollectTailExec(limit, child)
 
