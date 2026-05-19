@@ -42,7 +42,7 @@ class VeloxRDDScanSuite extends VeloxWholeStageTransformerSuite with AdaptiveSpa
 
   /** Creates a DataFrame backed by LogicalRDD/RDDScanExec from an existing DataFrame. */
   private def asRDDScanDF(data: DataFrame): DataFrame = {
-    val node = LogicalRDD(data.queryExecution.logical.output, data.queryExecution.toRdd)(
+    val node = LogicalRDD(data.queryExecution.analyzed.output, data.queryExecution.toRdd)(
       data.sparkSession.asInstanceOf[ClassicTypes.ClassicSparkSession])
     ClassicDataset.ofRows(spark, node).toDF()
   }
