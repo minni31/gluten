@@ -1130,6 +1130,7 @@ class VeloxSparkPlanExecApi extends SparkPlanExecApi with Logging {
       Sig[CollectSet](ExpressionNames.COLLECT_SET),
       Sig[VeloxBloomFilterMightContain](ExpressionNames.MIGHT_CONTAIN),
       Sig[VeloxBloomFilterAggregate](ExpressionNames.BLOOM_FILTER_AGG),
+      Sig[BitmapConstructAgg](ExpressionNames.BITMAP_CONSTRUCT_AGG),
       Sig[MapFilter](ExpressionNames.MAP_FILTER),
       Sig[AssertNotNull](ExpressionNames.ASSERT_NOT_NULL),
       // For test purpose.
